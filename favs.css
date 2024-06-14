@@ -50,6 +50,8 @@ h1 {
   display: block;
   padding: 1px 0px;
   box-sizing: border-box;
+  border-radius: 0px !important;
+  -webkit-appearance: none;
 }
 
 .textInput {

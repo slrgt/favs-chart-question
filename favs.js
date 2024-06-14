@@ -38,9 +38,14 @@ const defaultFields = [
   "retro vidya",
 ];
 const entry = [];
+const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 let width;
 let height;
 let modalSlot;
+
+const renderCanvas = document.createElement("canvas");
+const renderContext = renderCanvas.getContext("2d");
+const renderImage = new Image();
 
 const dialog = document.querySelector("dialog");
 
@@ -76,7 +81,6 @@ function setText() {
 }
 
 function updateImage(data, e = document.querySelector(`#box-${modalSlot}`)) {
-  console.log(data);
   if (!data?.files[0].type?.startsWith("image/")) {
     return false;
   }
@@ -120,26 +124,38 @@ function resetBox(i) {
   dialog.close();
 }
 
+function render() {
+  renderContext.clearRect(0, 0, renderCanvas.width, renderCanvas.height);
+  renderCanvas.width = width;
+  renderCanvas.height = height;
+  renderContext.drawImage(renderImage, 0, 0, width, height);
+  const dataUrl = renderCanvas.toDataURL("image/png");
+  if (isSafari) {
+    const safariModal = document.querySelector("dialog#safariModal");
+    safariModal.showModal();
+    safariModal.querySelector("img").src = dataUrl;
+    return;
+  }
+
+  const link = document.createElement("a");
+  link.setAttribute("download", "favchart.png");
+  link.setAttribute(
+    "href",
+    renderCanvas
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream")
+  );
+  link.click();
+}
+
 async function save() {
   const svg = document.querySelector("#svg");
   const svgURL = new XMLSerializer().serializeToString(svg);
-  const image = new Image();
-  image.onload = () => {
-    const canvas = document.createElement("canvas");
-    const context = canvas.getContext("2d");
-    canvas.width = width;
-    canvas.height = height;
-    context.drawImage(image, 0, 0, width, height);
-    const link = document.createElement("a");
-    link.setAttribute("download", "favchart.png");
-    link.setAttribute(
-      "href",
-      canvas.toDataURL("image/png").replace("image/png", "image/octet-stream")
-    );
-    link.click();
+  renderImage.onload = () => {
+    render();
   };
-
-  image.src = "data:image/svg+xml; charset=utf8, " + encodeURIComponent(svgURL);
+  renderImage.src =
+    "data:image/svg+xml; charset=utf8, " + encodeURIComponent(svgURL);
 }
 
 function showModal(e) {
@@ -173,7 +189,7 @@ document.addEventListener("click", (e) => {
   const t = e.target;
 
   if (t.closest("dialog") && !t.closest("#modalBounds")) {
-    dialog.close();
+    document.querySelectorAll("dialog").forEach((d) => d.close());
   }
 
   if (t.id === "saveButton") {
@@ -181,13 +197,15 @@ document.addEventListener("click", (e) => {
   } else if (t.closest(".content")) {
     showModal(t.closest(".box"));
   } else if (t.matches("#closeModal")) {
-    dialog.close();
+    t.closest("dialog").close();
   } else if (t.matches("#resetButton")) {
     resetBox(modalSlot);
   } else if (t.closest(".scaling-choice")) {
     scalingChanged(t);
   } else if (t.matches("#setText")) {
     setText(t);
+  } else if (t.matches("#reRender")) {
+    render();
   }
 });
 
