@@ -149,13 +149,29 @@ function render() {
 }
 
 async function save() {
-  const svg = document.querySelector("#svg");
-  const svgURL = new XMLSerializer().serializeToString(svg);
-  renderImage.onload = () => {
-    render();
+  const svg = document.querySelector("#svg").cloneNode(true);
+
+  const font = await fetch("./resources/Impact.ttf");
+  const fontBlob = await font.blob();
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    const fontFace = `
+        @font-face {
+            font-family: "Impact";
+            src: url("${reader.result}") format("truetype");
+        }
+    `;
+    svg.querySelector("style").textContent += fontFace;
+    const svgURL = new XMLSerializer().serializeToString(svg);
+    renderImage.onload = () => {
+      render();
+    };
+    renderImage.src =
+      "data:image/svg+xml; charset=utf8, " + encodeURIComponent(svgURL);
   };
-  renderImage.src =
-    "data:image/svg+xml; charset=utf8, " + encodeURIComponent(svgURL);
+  reader.readAsDataURL(fontBlob);
 }
 
 function showModal(e) {

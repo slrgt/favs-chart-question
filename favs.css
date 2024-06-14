@@ -116,6 +116,10 @@ dialog > div {
   gap: 1rem;
 }
 
+dialog img {
+  border: 5px solid black;
+}
+
 #modalHeader {
   display: flex;
   width: 100%;
