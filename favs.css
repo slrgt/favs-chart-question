@@ -1,0 +1,131 @@
+@font-face {
+  font-family: "HelveticaBold";
+  src: url("./resources/Helvetica-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Impact";
+  src: url("./resources/Impact.ttf");
+}
+
+body {
+  background-color: white;
+  font-family: "HelveticaBold";
+  text-align: center;
+}
+
+#svg {
+  max-height: 60vh;
+  border: solid 5px black;
+  margin: 20px 0;
+  background-size: 100%;
+}
+
+h1 {
+  color: black;
+  font-size: min(12vw, 56px);
+  text-align: center;
+  margin: 0px 0;
+}
+
+.inputs {
+  text-align: center;
+}
+
+.inputs label,
+.inputs button,
+.inputs input:not([type="file"]) {
+  background: rgba(127, 127, 127, 0.1);
+  border: none;
+  border-bottom: solid 3px rgba(0, 0, 0, 0.35);
+  font-family: HelveticaBold;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 32px;
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  display: block;
+  padding: 1px 0px;
+  box-sizing: border-box;
+}
+
+.textInput {
+  min-height: 43px;
+}
+
+.fileInput {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+p {
+  margin: 0px;
+}
+
+input[type="file"],
+input[type="color"] {
+  display: none;
+}
+
+.inputs {
+  margin: 0px 0;
+}
+
+.inputs > div {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+}
+
+.choice {
+  display: flex;
+}
+
+.choice button {
+  width: 100%;
+  cursor: pointer;
+}
+
+.choice button.selected {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+dialog[open] {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 90%;
+}
+
+#modalHeader {
+  display: flex;
+  width: 100%;
+}
+
+#modalHeader h2 {
+  flex-grow: 1;
+  margin: 0px;
+  text-align: start;
+  text-transform: uppercase;
+}
+
+#modalHeader button {
+  flex-shrink: 0;
+}
+
+.content-container *,
+label {
+  cursor: pointer;
+}

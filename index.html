@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fav Chart Builder</title>
+    <link href="favs.css" rel="stylesheet" type="text/css" />
+    <link
+      rel="preload"
+      href="resources/Impact.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="title" content="Fav Chart Generator" />
+    <meta name="description" content="Easily build your fav chart." />
+    <meta name="theme-color" content="#ffffff" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://favs.xyl.sh/" />
+    <meta property="og:title" content="Fav Chart Generator" />
+    <meta property="og:description" content="Easily build your fav chart." />
+    <meta
+      property="og:image"
+      content="https://favs.xyl.sh/resources/example.png"
+    />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://favs.xyl.sh/" />
+    <meta property="twitter:title" content="Fav Chart Generator" />
+    <meta
+      property="twitter:description"
+      content="Easily build your fav chart."
+    />
+    <meta
+      property="twitter:image"
+      content="https://favs.xyl.sh/resources/example.png"
+    />
+  </head>
+  <body>
+    <h1>Fav Chart Builder</h1>
+    <svg id="svg" style="--scale: cover">
+      <style>
+        svg {
+          background: white;
+        }
+
+        .alignRight {
+          text-anchor: end;
+        }
+
+        svg image {
+          cursor: pointer;
+        }
+
+        svg #container input {
+          font-size: 2rem;
+        }
+
+        .text-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+          background-color: white;
+          overflow: hidden;
+        }
+
+        .header-container {
+          display: grid !important;
+          grid-template-columns: 25% 25% 25% 25%;
+        }
+
+        .header-container > span {
+          font-size: 4rem;
+          grid-column: 2 / 4;
+          display: flex;
+          white-space: nowrap;
+        }
+
+        .text-container > * {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          width: 100%;
+          font-family: "Impact";
+          text-transform: uppercase;
+          overflow: hidden;
+        }
+
+        .content {
+          font-size: 3rem;
+          -webkit-text-stroke: 2px white;
+          paint-order: stroke fill;
+          overflow-wrap: anywhere;
+          overflow: auto;
+          background-size: var(--scale);
+          background-repeat: no-repeat;
+          background-position: center center;
+          height: 100%;
+          overflow: hidden;
+          cursor: pointer;
+        }
+
+        .label {
+          font-size: 2rem;
+          white-space: nowrap;
+        }
+      </style>
+    </svg>
+    <div class="inputs">
+      <button id="saveButton">Download Image</button><br />
+      <div class="choice scaling-choice">
+        <button class="selected" val="cover">FILL</button>
+        <button val="contain">FIT</button>
+      </div>
+      <br />
+    </div>
+    <dialog id="slotModal">
+      <div id="modalBounds">
+        <div id="modalHeader">
+          <h2>Fav Chart Builder</h2>
+          <button id="closeModal" autofocus>✖</button>
+        </div>
+        <br />
+        <div class="inputs">
+          <div class="choice scaling-choice">
+            <button class="selected" val="cover">FILL</button>
+            <button val="contain">FIT</button>
+          </div>
+          <br />
+          <br />
+          <input
+            id="select-file"
+            name="select-file"
+            type="file"
+            accept="image/*"
+          />
+          <label for="select-file" class="fileInput">SELECT FILE</label>
+          <br />
+          <br />
+          <button id="pasteButton">PASTE IMAGE</button>
+          <br />
+          <br />
+          <input
+            placeholder="TYPE HERE..."
+            id="textField"
+            class="textInput"
+            autocomplete="off"
+          />
+          <button id="setText">SET TEXT</button>
+          <br />
+          <br />
+          <button id="resetButton">RESET</button>
+        </div>
+      </div>
+    </dialog>
+  </body>
+</html>
+
+<script src="favs.js"></script>
