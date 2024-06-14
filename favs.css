@@ -30,6 +30,8 @@ h1 {
 
 .inputs {
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .inputs label,
@@ -102,11 +104,14 @@ button {
   outline: inherit;
 }
 
-dialog[open] {
+dialog {
+  max-width: 90%;
+}
+
+dialog > div {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-width: 90%;
 }
 
 #modalHeader {

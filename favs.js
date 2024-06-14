@@ -169,20 +169,6 @@ function showModal(e) {
   dialog.showModal();
 }
 
-async function paste() {
-  const clipboard = await navigator.clipboard.read();
-  for (const item of clipboard) {
-    const images = item.types.filter((type) => type.startsWith("image/"));
-    if (!images.length) {
-      break;
-    }
-    updateImage({ files: [await item.getType(images[0])] });
-    return;
-  }
-
-  alert("No image blob found.");
-}
-
 document.addEventListener("click", (e) => {
   const t = e.target;
 
@@ -202,8 +188,6 @@ document.addEventListener("click", (e) => {
     scalingChanged(t);
   } else if (t.matches("#setText")) {
     setText(t);
-  } else if (t.matches("#pasteButton")) {
-    paste();
   }
 });
 
