@@ -140,3 +140,9 @@ dialog img {
 label {
   cursor: pointer;
 }
+
+.rows-columns {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
