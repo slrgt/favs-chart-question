@@ -1,9 +1,1 @@
-# Favs Chart Generator
-
-Allows easy creation of favourite charts by dragging and dropping, pasting, and selecting images.
-
-No need to open Photoshop!
-
-<https://favs.xyl.sh>
-
-![Blank template](https://favs.xyl.sh/resources/example.png)
+Hi, I loved your Reddit-Comments-For-Youtube extension and used it daily to check Lemmy comments on websites across the web and reddit comments on youtube. Is there a reason the repo and extensions have dissapeared? I can't find any info anywhere or any way to contact you :/
